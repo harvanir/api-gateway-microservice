@@ -1,0 +1,9 @@
+server:
+  port: 8761 # default zone
+spring:
+  application:
+    name: eureka
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

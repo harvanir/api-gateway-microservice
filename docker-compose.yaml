@@ -1,0 +1,155 @@
+version: "3.7"
+
+services:
+  eureka:
+    container_name: eureka
+    image: eureka
+    ports:
+      - 8761:8761
+    networks:
+      - service
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
+        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  spring-cloud-gateway:
+    container_name: spring-cloud-gateway
+    image: spring-cloud-gateway
+    ports:
+      - 9090:9090
+#      - 7001:7001
+    networks:
+      - service
+    #    restart: unless-stopped
+    depends_on:
+      - eureka
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 49999
+        hard: 99999
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
+        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+#        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+#        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
+#        -Dcom.sun.management.jmxremote.port=7001 -Dcom.sun.management.jmxremote.rmi.port=7001
+    deploy:
+      resources:
+        limits:
+#          cpus: '8'
+          memory: 256m
+    #          cpus: '0.95'
+    #        reservations:
+    #          cpus: '0.25'
+    #          memory: 1g # (MaxRAMPercentage * 6112M) = 5500M = -Xmx5500M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  webflux:
+    container_name: webflux
+    image: webflux
+    ports:
+      - 8080:8080
+    depends_on:
+      - eureka
+      - spring-cloud-gateway
+    networks:
+      - service
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 49999
+        hard: 99999
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
+        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  webmvc:
+    container_name: webmvc
+    image: webmvc
+    ports:
+      - 8282:8080
+    networks:
+      - service
+    depends_on:
+      - eureka
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 49999
+        hard: 99999
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
+        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  go:
+    container_name: go
+    image: go
+    ports:
+      - 8181:8080
+    networks:
+      - service
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 49999
+        hard: 99999
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+networks:
+  service:

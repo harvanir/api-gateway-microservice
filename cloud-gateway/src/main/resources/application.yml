@@ -1,0 +1,41 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: hello-webflux-lb
+          uri: lb://webflux
+          predicates:
+            - Path=/webflux-lb/hello/**
+          filters:
+            - RewritePath=/webflux-lb/hello/(?<rewrite>.*), /hello/${rewrite}
+        - id: hello-webflux
+          uri: http://webflux:8080
+          predicates:
+            - Path=/webflux/hello/**
+          filters:
+            - RewritePath=/webflux/hello/(?<rewrite>.*), /hello/${rewrite}
+        - id: hello-webmvc
+          uri: http://webmvc:8080
+          predicates:
+            - Path=/webmvc/hello/**
+          filters:
+            - RewritePath=/webmvc/hello/(?<rewrite>.*), /hello/${rewrite}
+        - id: hello-go
+          uri: http://go:8080
+          predicates:
+            - Path=/go/hello/**
+          filters:
+            - RewritePath=/go/hello/(?<rewrite>.*), /hello/${rewrite}
+    loadbalancer:
+      ribbon:
+        enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka/
+#      defaultZone: http://localhost:8761/eureka/
+    registry-fetch-interval-seconds: 1

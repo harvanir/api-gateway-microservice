@@ -25,7 +25,7 @@
 
 ## Build & Run
 ```shell script
-sh build-run.sh
+./build-run
 ```
 
 ## List of API

@@ -1,3 +1,4 @@
+#!/bin/sh
 cd eureka||exit
 ./mvnw clean install -Dmaven.test.skip=true
 docker build -t eureka .
@@ -18,4 +19,3 @@ cd ../go||exit
 docker build -t go .
 
 cd ..
-docker-compose -f docker-compose.yaml --compatibility up

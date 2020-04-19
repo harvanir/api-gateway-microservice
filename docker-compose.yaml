@@ -34,10 +34,10 @@ services:
     depends_on:
       - eureka
     ulimits:
-      nproc: 65535
+      nproc: 514933
       nofile:
-        soft: 49999
-        hard: 99999
+        soft: 65535
+        hard: 65535
     sysctls:
       net.ipv4.tcp_tw_reuse: 1
       net.ipv4.ip_local_port_range: 1025 65000
@@ -74,10 +74,10 @@ services:
     networks:
       - service
     ulimits:
-      nproc: 65535
+      nproc: 514933
       nofile:
-        soft: 49999
-        hard: 99999
+        soft: 65535
+        hard: 65535
     sysctls:
       net.ipv4.tcp_tw_reuse: 1
       net.ipv4.ip_local_port_range: 1025 65000
@@ -106,10 +106,10 @@ services:
       - eureka
       - spring-cloud-gateway
     ulimits:
-      nproc: 65535
+      nproc: 514933
       nofile:
-        soft: 49999
-        hard: 99999
+        soft: 65535
+        hard: 65535
     sysctls:
       net.ipv4.tcp_tw_reuse: 1
       net.ipv4.ip_local_port_range: 1025 65000
@@ -135,10 +135,10 @@ services:
     networks:
       - service
     ulimits:
-      nproc: 65535
+      nproc: 514933
       nofile:
-        soft: 49999
-        hard: 99999
+        soft: 65535
+        hard: 65535
     sysctls:
       net.ipv4.tcp_tw_reuse: 1
       net.ipv4.ip_local_port_range: 1025 65000

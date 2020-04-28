@@ -10,24 +10,20 @@ services:
       - service
     environment:
       JVM_OPT: |-
-        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
-        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
     deploy:
       resources:
         limits:
           memory: 256m
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
 
   spring-cloud-gateway:
     container_name: spring-cloud-gateway
     image: spring-cloud-gateway
     ports:
       - 9090:9090
-#      - 7001:7001
+      - 7001:7001
     networks:
       - service
     #    restart: unless-stopped
@@ -43,31 +39,23 @@ services:
       net.ipv4.ip_local_port_range: 1025 65000
     environment:
       JVM_OPT: |-
-        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
-        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
-#        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
-#        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
-#        -Dcom.sun.management.jmxremote.port=7001 -Dcom.sun.management.jmxremote.rmi.port=7001
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
+        -Dcom.sun.management.jmxremote.port=7001 -Dcom.sun.management.jmxremote.rmi.port=7001
     deploy:
       resources:
         limits:
-#          cpus: '8'
-          memory: 256m
-    #          cpus: '0.95'
-    #        reservations:
-    #          cpus: '0.25'
-    #          memory: 1g # (MaxRAMPercentage * 6112M) = 5500M = -Xmx5500M
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
+          memory: 512m
 
   webflux:
     container_name: webflux
     image: webflux
     ports:
       - 8080:8080
+      - 7002:7002
     depends_on:
       - eureka
       - spring-cloud-gateway
@@ -83,23 +71,23 @@ services:
       net.ipv4.ip_local_port_range: 1025 65000
     environment:
       JVM_OPT: |-
-        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
-        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
+        -Dcom.sun.management.jmxremote.port=7002 -Dcom.sun.management.jmxremote.rmi.port=7002
     deploy:
       resources:
         limits:
           memory: 256m
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
 
   webmvc:
     container_name: webmvc
     image: webmvc
     ports:
       - 8282:8080
+      - 7003:7003
     networks:
       - service
     depends_on:
@@ -115,17 +103,16 @@ services:
       net.ipv4.ip_local_port_range: 1025 65000
     environment:
       JVM_OPT: |-
-        -XX:+UseG1GC -XX:MaxRAMPercentage=90.0 -XX:G1HeapRegionSize=2m -XX:MaxHeapFreeRatio=70 -Xloggc:GC.log
-        -XX:+UseStringDeduplication -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
+        -Dcom.sun.management.jmxremote.port=7003 -Dcom.sun.management.jmxremote.rmi.port=7003
     deploy:
       resources:
         limits:
           memory: 256m
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
 
   go:
     container_name: go
@@ -146,10 +133,6 @@ services:
       resources:
         limits:
           memory: 256m
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "3"
 networks:
   service:
+    driver: bridge

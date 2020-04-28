@@ -1,4 +1,4 @@
-FROM openjdk:8u212-jre-alpine3.9
+FROM azul/zulu-openjdk-alpine:11.0.7-jre-headless
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 ENV JVM_OPT " "

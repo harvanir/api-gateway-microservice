@@ -1,4 +1,7 @@
-# Demo API-Gateway with Downstream
+# Demo API-Gateway with Microservices
+
+## Topology
+![Topology](docs/topology.png)
 
 ## Technology
 - Spring Cloud Netflix Eureka
@@ -8,6 +11,7 @@
 - Golang
 - Kong
 - Nginx
+- [ ] NodeJS
 - JMeter (test-plan-jmeter.jmx)
 
 ## Pre requiste
@@ -18,7 +22,7 @@
 - Kong
 - Nginx
 
-## List of Downstream
+## List of Microservices
 - Spring Webflux
 - Spring Webmvc
 - Go
@@ -35,6 +39,11 @@
 - http://localhost:9090/webmvc/hello/name
 - http://localhost:9090/go/hello/name
 
+### Nginx
+- http://localhost:9191/webflux/hello/name
+- http://localhost:9191/webmvc/hello/name
+- http://localhost:9191/go/hello/name
+
 ### Spring Webflux
 - http://localhost:8080/hello/name
 
@@ -43,3 +52,7 @@
 
 ### Go
 - http://localhost:8181/hello/name
+
+## Test
+Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>
+See <b>User Define Variables</b>.

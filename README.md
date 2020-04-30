@@ -32,27 +32,36 @@
 ./build-run
 ```
 
-## List of API
-### Spring Cloud Gateway
-- http://localhost:9090/webflux/hello/name
-- http://localhost:9090/webflux-lb/hello/name
-- http://localhost:9090/webmvc/hello/name
-- http://localhost:9090/go/hello/name
+## API Endpoint
 
-### Nginx
-- http://localhost:9191/webflux/hello/name
-- http://localhost:9191/webmvc/hello/name
-- http://localhost:9191/go/hello/name
+### API Gateway
+ - URL: 
+    - /webflux/hello/name
+    - /webflux-lb/hello/name
+    - /webmvc/hello/name
+    - /go/hello/name
+ - Query Parameter:
+    - delay (optional)
+ - API Gateway port:
+    - Spring Cloud Gateway: 9090
+    - Nginx: 9191
 
-### Spring Webflux
-- http://localhost:8080/hello/name
-
-### Spring Webmvc
-- http://localhost:8282/hello/name
-
-### Go
-- http://localhost:8181/hello/name
+### Microservice
+ - URL: 
+    - /hello/name
+ - Query Parameter:
+    - delay (optional)
+ - Microservice port:
+    - Spring Webflux: 8080
+    - Golang: 8181
+    - Spring Webmvc: 8282
 
 ## Test
 Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>
-See <b>User Define Variables</b>.
+Available <b>User Define Variables</b>:
+- gwhost (API Gateway hostname/IP address)
+- mshost (Microservice hostname/ip address)
+- delay (Microservice request delay in milliseconds)
+- concurrent (Number of threads(users) each thread group)
+- duration (Test duration in seconds)
+- rampup (Ramp-up period in seconds)

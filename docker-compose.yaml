@@ -121,6 +121,61 @@ services:
       - 8181:8080
     networks:
       - service
+    depends_on:
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
+  quarkus-vertex-jvm:
+    container_name: quarkus-vertex-jvm
+    image: quarkus-vertex-jvm
+    ports:
+      - 8383:8080
+      - 7004:7004
+    networks:
+      - service
+    depends_on:
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
+        -Dcom.sun.management.jmxremote.port=7004 -Dcom.sun.management.jmxremote.rmi.port=7004
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
+  quarkus-vertex-native:
+    container_name: quarkus-vertex-native
+    image: quarkus-vertex-native
+    ports:
+      - 8484:8080
+    networks:
+      - service
+    depends_on:
+      - spring-cloud-gateway
     ulimits:
       nproc: 514933
       nofile:
@@ -152,6 +207,10 @@ services:
       net.ipv4.ip_local_port_range: 1025 65000
     depends_on:
       - webflux
+      - webmvc
+      - go
+      - quarkus-vertex-jvm
+      - quarkus-vertex-native
     deploy:
       resources:
         limits:

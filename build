@@ -18,4 +18,11 @@ docker build -t webmvc .
 cd ../go||exit
 docker build -t go .
 
+cd ../quarkus-vertx||exit
+./mvnw clean package
+docker build -f Dockerfile.jvm -t quarkus-vertex-jvm .
+
+./mvnw clean package -Pnative # remark if you are build without host GraalVM
+docker build -f Dockerfile.native -t quarkus-vertex-native .
+
 cd ..

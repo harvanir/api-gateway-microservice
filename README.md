@@ -1,34 +1,50 @@
-# Demo API-Gateway with Microservices
+# API Gateway x Microservice
+- This project aims to explore API Gateway products combined with Microservice which uses several programming languages / frameworks.
+- The expectation:
+  - Advanced features & configurations.
+  - Performance / Utilization comparison report (startup time, throughput, latency, cpu usage, memory usage, system behaviour under high load to handling slow process / connection / downstream, etc).
+---
+At the microservice layer, we use static or dynamic REST API responses that have a delay capability in milliseconds that can affect variants of performance at the API Gateway & Microservices layer.
 
 ## Topology
 ![Topology](docs/topology.png)
 
+## Pre requiste
+- Git
+- Java JDK 8+
+- Docker
+- GraalVM (Quarkus native)
+- JMeter
+
 ## Technology
+### Service discovery
 - Spring Cloud Netflix Eureka
+
+### API Gateway / Reverse proxy
 - Spring Cloud Gateway
+- Nginx
+- Kong
+
+### Microservice
 - Spring Webflux
 - Spring Webmvc
 - Golang
-- Kong
-- Nginx
-- [ ] NodeJS
+- Play Framework
+- Vert.x
+- Quarkus Vert.x JVM
+- Quarkus Vert.x Native
+- Quarkus etc JVM
+- Quarkus etc Native
+- Akka
+- NodeJS
+
+### Testing tools
 - JMeter (test-plan-jmeter.jmx)
-
-## Pre requiste
-- Docker
-
-## List of API Gateway / Reverse proxy
-- Spring Cloud Gateway
-- Kong
-- Nginx
-
-## List of Microservices
-- Spring Webflux
-- Spring Webmvc
-- Go
 
 ## Build & Run
 ```shell script
+./build
+./run
 ./build-run
 ```
 
@@ -36,10 +52,12 @@
 
 ### API Gateway
  - URL: 
-    - /webflux/hello/name
-    - /webflux-lb/hello/name
-    - /webmvc/hello/name
-    - /go/hello/name
+    - /webflux/hello/{name}
+    - /webflux-lb/hello/{name}
+    - /webmvc/hello/{name}
+    - /go/hello/{name}
+    - /quarkus-vertx-jvm/hello/{name}
+    - /quarkus-vertx-native/hello/{name}
  - Query Parameter:
     - delay (optional)
  - API Gateway port:
@@ -48,13 +66,15 @@
 
 ### Microservice
  - URL: 
-    - /hello/name
+    - /hello/{name}
  - Query Parameter:
     - delay (optional)
  - Microservice port:
     - Spring Webflux: 8080
     - Golang: 8181
     - Spring Webmvc: 8282
+    - Quarkus Vert.x JVM: 8383
+    - Quarkus Vert.x Native: 8484
 
 ## Test
 Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>

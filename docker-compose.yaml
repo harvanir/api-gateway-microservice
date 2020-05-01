@@ -136,9 +136,9 @@ services:
         limits:
           memory: 256m
 
-  quarkus-vertex-jvm:
-    container_name: quarkus-vertex-jvm
-    image: quarkus-vertex-jvm
+  quarkus-vertx-jvm:
+    container_name: quarkus-vertx-jvm
+    image: quarkus-vertx-jvm
     ports:
       - 8383:8080
       - 7004:7004
@@ -167,9 +167,9 @@ services:
         limits:
           memory: 256m
 
-  quarkus-vertex-native:
-    container_name: quarkus-vertex-native
-    image: quarkus-vertex-native
+  quarkus-vertx-native:
+    container_name: quarkus-vertx-native
+    image: quarkus-vertx-native
     ports:
       - 8484:8080
     networks:
@@ -207,10 +207,7 @@ services:
       net.ipv4.ip_local_port_range: 1025 65000
     depends_on:
       - webflux
-      - webmvc
-      - go
-      - quarkus-vertex-jvm
-      - quarkus-vertex-native
+      - quarkus-vertx-jvm
     deploy:
       resources:
         limits:

@@ -20,9 +20,9 @@ docker build -t go .
 
 cd ../quarkus-vertx||exit
 ./mvnw clean package
-docker build -f Dockerfile.jvm -t quarkus-vertex-jvm .
+docker build -f Dockerfile.jvm -t quarkus-vertx-jvm .
 
 ./mvnw clean package -Pnative # remark if you are build without host GraalVM
-docker build -f Dockerfile.native -t quarkus-vertex-native .
+docker build -f Dockerfile.native -t quarkus-vertx-native .
 
 cd ..

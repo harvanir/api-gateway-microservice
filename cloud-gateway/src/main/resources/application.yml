@@ -30,6 +30,18 @@ spring:
             - Path=/go/**
           filters:
             - RewritePath=/go/(?<rewrite>.*), /${rewrite}
+        - id: hello-quarkus-vertx-jvm
+          uri: http://quarkus-vertx-jvm:8080
+          predicates:
+            - Path=/quarkus-vertx-jvm/**
+          filters:
+            - RewritePath=/quarkus-vertx-jvm/(?<rewrite>.*), /${rewrite}
+        - id: hello-quarkus-vertx-native
+          uri: http://quarkus-vertx-native:8080
+          predicates:
+            - Path=/quarkus-vertx-native/**
+          filters:
+            - RewritePath=/quarkus-vertx-native/(?<rewrite>.*), /${rewrite}
     loadbalancer:
       ribbon:
         enabled: false

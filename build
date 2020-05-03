@@ -22,11 +22,11 @@ cd ../vertx-rxjava2||exit
 ./mvnw clean package -Dmaven.test.skip=true
 docker build -t vertx-rxjava2 .
 
-cd ../quarkus-vertx||exit
+cd ../quarkus-vertx-resteasy||exit
 ./mvnw clean package
-docker build -f Dockerfile.jvm -t quarkus-vertx-jvm .
+docker build -f Dockerfile.jvm -t quarkus-vertx-resteasy-jvm .
 
 ./mvnw clean package -Pnative # remark if you are build without host GraalVM
-docker build -f Dockerfile.native -t quarkus-vertx-native .
+docker build -f Dockerfile.native -t quarkus-vertx-resteasy-native .
 
 cd ..

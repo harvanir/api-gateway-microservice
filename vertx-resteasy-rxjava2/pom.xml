@@ -5,20 +5,40 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.harvanir.demo</groupId>
-    <artifactId>vertx-rxjava2</artifactId>
+    <artifactId>vertx-resteasy-rxjava2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>vertx-rxjava2</name>
 
     <properties>
-        <vertx.version>3.9.0</vertx.version>
+        <vertx.version>3.8.5</vertx.version>
+        <resteasy.version>4.5.3.Final</resteasy.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-rxjava2</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-cdi</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-vertx</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
+            <version>${vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
             <version>${vertx.version}</version>
         </dependency>
         <dependency>
@@ -55,8 +75,9 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Main-Class>io.vertx.core.Launcher</Main-Class>
-                                        <Main-Verticle>org.harvanir.demo.vertx.RxJava2Verticle</Main-Verticle>
+                                        <Main-Class>io.vertx.core.Starter</Main-Class>
+                                        <Main-Verticle>org.harvanir.demo.vertx.VertxRestEasyRxJava2MainVerticle
+                                        </Main-Verticle>
                                     </manifestEntries>
                                 </transformer>
                             </transformers>

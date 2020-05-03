@@ -3,12 +3,12 @@ package org.harvanir.demo.vertx;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.VertxOptions;
 import io.vertx.reactivex.core.AbstractVerticle;
-import org.harvanir.demo.vertx.handler.HttpVerticle;
+import org.harvanir.demo.vertx.verticle.HttpVerticle;
 
 /**
  * @author Harvan Irsyadi
  */
-public class ReactiveServer extends AbstractVerticle {
+public class RxJava2Verticle extends AbstractVerticle {
 
     @Override
     public void start() {

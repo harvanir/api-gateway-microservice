@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.harvanir.demo</groupId>
-    <artifactId>quarkus-vertx</artifactId>
+    <artifactId>quarkus-vertx-resteasy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>

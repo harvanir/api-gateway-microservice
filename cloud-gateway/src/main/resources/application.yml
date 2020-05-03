@@ -30,19 +30,19 @@ spring:
             - Path=/go/**
           filters:
             - RewritePath=/go/(?<rewrite>.*), /${rewrite}
-        - id: hello-quarkus-vertx-jvm
-          uri: http://quarkus-vertx-jvm:8080
+        - id: hello-quarkus-vertx-resteasy-jvm
+          uri: http://quarkus-vertx-resteasy-jvm:8080
           predicates:
-            - Path=/quarkus-vertx-jvm/**
+            - Path=/quarkus-vertx-resteasy-jvm/**
           filters:
-            - RewritePath=/quarkus-vertx-jvm/(?<rewrite>.*), /${rewrite}
-        - id: hello-quarkus-vertx-native
-          uri: http://quarkus-vertx-native:8080
+            - RewritePath=/quarkus-vertx-resteasy-jvm/(?<rewrite>.*), /${rewrite}
+        - id: hello-quarkus-vertx-resteasy-native
+          uri: http://quarkus-vertx-resteasy-native:8080
           predicates:
-            - Path=/quarkus-vertx-native/**
+            - Path=/quarkus-vertx-resteasy-native/**
           filters:
-            - RewritePath=/quarkus-vertx-native/(?<rewrite>.*), /${rewrite}
-        - id: vertx-rxjava2
+            - RewritePath=/quarkus-vertx-resteasy-native/(?<rewrite>.*), /${rewrite}
+        - id: hello-vertx-rxjava2
           uri: http://vertx-rxjava2:8080
           predicates:
             - Path=/vertx-rxjava2/**

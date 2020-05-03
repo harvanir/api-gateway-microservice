@@ -1,7 +1,8 @@
-package org.harvanir.demo.vertx.handler;
+package org.harvanir.demo.vertx.verticle;
 
 import io.vertx.reactivex.core.AbstractVerticle;
 import io.vertx.reactivex.ext.web.Router;
+import org.harvanir.demo.vertx.handler.HelloHandler;
 
 /**
  * @author Harvan Irsyadi

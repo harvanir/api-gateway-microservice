@@ -18,6 +18,10 @@ docker build -t webmvc .
 cd ../go||exit
 docker build -t go .
 
+cd ../vertx-rxjava2||exit
+./mvnw clean package -Dmaven.test.skip=true
+docker build -t vertx-rxjava2 .
+
 cd ../quarkus-vertx||exit
 ./mvnw clean package
 docker build -f Dockerfile.jvm -t quarkus-vertx-jvm .

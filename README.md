@@ -30,7 +30,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
 - Spring Webmvc
 - Golang
 - Play Framework
-- Vert.x
+- Vert.x RxJava2
 - Quarkus Vert.x JVM
 - Quarkus Vert.x Native
 - Quarkus etc JVM
@@ -58,6 +58,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
     - /go/hello/{name}
     - /quarkus-vertx-jvm/hello/{name}
     - /quarkus-vertx-native/hello/{name}
+    - /vertx-rxjava2/hello/{name}
  - Query Parameter:
     - delay (optional)
  - API Gateway port:
@@ -75,6 +76,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
     - Spring Webmvc: 8282
     - Quarkus Vert.x JVM: 8383
     - Quarkus Vert.x Native: 8484
+    - Vert.x RxJava2: 8585
 
 ## Test
 Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>

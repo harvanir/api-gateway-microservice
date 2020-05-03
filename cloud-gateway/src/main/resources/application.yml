@@ -42,6 +42,12 @@ spring:
             - Path=/quarkus-vertx-native/**
           filters:
             - RewritePath=/quarkus-vertx-native/(?<rewrite>.*), /${rewrite}
+        - id: vertx-rxjava2
+          uri: http://vertx-rxjava2:8080
+          predicates:
+            - Path=/vertx-rxjava2/**
+          filters:
+            - RewritePath=/vertx-rxjava2/(?<rewrite>.*), /${rewrite}
     loadbalancer:
       ribbon:
         enabled: false

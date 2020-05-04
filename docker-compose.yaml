@@ -220,6 +220,37 @@ services:
         limits:
           memory: 256m
 
+  vertx-resteasy-rxjava2:
+    container_name: vertx-resteasy-rxjava2
+    image: vertx-resteasy-rxjava2
+    ports:
+      - 8686:8080
+      - 7006:7006
+    networks:
+      - service
+    depends_on:
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
+        -Dcom.sun.management.jmxremote.port=7006 -Dcom.sun.management.jmxremote.rmi.port=7006
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
   nginx:
     container_name: nginx
     image: nginx:1.18-alpine

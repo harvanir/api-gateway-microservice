@@ -12,42 +12,56 @@ spring:
             - Path=/webflux-lb/**
           filters:
             - RewritePath=/webflux-lb/(?<rewrite>.*), /${rewrite}
+
         - id: hello-webflux
           uri: http://webflux:8080
           predicates:
             - Path=/webflux/**
           filters:
             - RewritePath=/webflux/(?<rewrite>.*), /${rewrite}
+
         - id: hello-webmvc
           uri: http://webmvc:8080
           predicates:
             - Path=/webmvc/**
           filters:
             - RewritePath=/webmvc/(?<rewrite>.*), /${rewrite}
+
         - id: hello-go
           uri: http://go:8080
           predicates:
             - Path=/go/**
           filters:
             - RewritePath=/go/(?<rewrite>.*), /${rewrite}
+
         - id: hello-quarkus-vertx-resteasy-jvm
           uri: http://quarkus-vertx-resteasy-jvm:8080
           predicates:
             - Path=/quarkus-vertx-resteasy-jvm/**
           filters:
             - RewritePath=/quarkus-vertx-resteasy-jvm/(?<rewrite>.*), /${rewrite}
+
         - id: hello-quarkus-vertx-resteasy-native
           uri: http://quarkus-vertx-resteasy-native:8080
           predicates:
             - Path=/quarkus-vertx-resteasy-native/**
           filters:
             - RewritePath=/quarkus-vertx-resteasy-native/(?<rewrite>.*), /${rewrite}
+
         - id: hello-vertx-rxjava2
           uri: http://vertx-rxjava2:8080
           predicates:
             - Path=/vertx-rxjava2/**
           filters:
             - RewritePath=/vertx-rxjava2/(?<rewrite>.*), /${rewrite}
+
+        - id: hello-vertx-resteasy-rxjava2
+          uri: http://vertx-resteasy-rxjava2:8080
+          predicates:
+            - Path=/vertx-resteasy-rxjava2/**
+          filters:
+            - RewritePath=/vertx-resteasy-rxjava2/(?<rewrite>.*), /${rewrite}
+
     loadbalancer:
       ribbon:
         enabled: false

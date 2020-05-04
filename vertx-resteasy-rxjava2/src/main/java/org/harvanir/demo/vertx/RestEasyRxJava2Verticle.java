@@ -8,13 +8,13 @@ import org.harvanir.demo.vertx.verticle.HttpVerticle;
 /**
  * @author Harvan Irsyadi
  */
-public class VertxRestEasyRxJava2MainVerticle extends AbstractVerticle {
+public class RestEasyRxJava2Verticle extends AbstractVerticle {
 
     @Override
     public void start() {
         DeploymentOptions options = new DeploymentOptions();
         options.setInstances(VertxOptions.DEFAULT_EVENT_LOOP_POOL_SIZE);
 
-        vertx.deployVerticle(HttpVerticle.class.getName());
+        vertx.deployVerticle(HttpVerticle.class.getName(), options);
     }
 }

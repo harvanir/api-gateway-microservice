@@ -1,0 +1,20 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: zuul-demo
+zuul:
+  routes:
+    hello-webflux:
+      service-id: hello-webflux
+      path: /webflux/**
+      url: http://webflux:8080
+      retryable: true
+    hello-go:
+      service-id: hello-go
+      path: /go/**
+      url: http://go:8080
+      retryable: true
+  host:
+    max-per-route-connections: 200
+    max-total-connections: 600 # route-count x max-per-route-connections

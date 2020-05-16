@@ -23,6 +23,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
 ### API Gateway / Reverse proxy
 - Spring Cloud Gateway
 - Nginx
+- Zuul
 - Kong
 
 ### Microservice
@@ -66,6 +67,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
  - API Gateway port:
     - Spring Cloud Gateway: 9090
     - Nginx: 9191
+    - Zuul: 9292
 
 ### Microservice
  - URL: 

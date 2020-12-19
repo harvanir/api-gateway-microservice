@@ -1,0 +1,2 @@
+#!/bin/sh
+docker run -d -p 80:80 --rm --name php-8.0-apache2-app php-8.0-apache2

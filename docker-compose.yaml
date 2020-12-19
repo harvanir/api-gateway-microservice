@@ -275,6 +275,26 @@ services:
     container_name: php-5.6-nginx
     image: php-5.6-nginx
     ports:
+      - 8788:80
+    networks:
+      - service
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
+  php-8.0-apache2:
+    container_name: php-8.0-apache2
+    image: php-8.0-apache2
+    ports:
       - 8888:80
     networks:
       - service
@@ -290,6 +310,8 @@ services:
       resources:
         limits:
           memory: 256m
+    volumes:
+      - ./php/conf/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini:ro
 
   nginx:
     container_name: nginx

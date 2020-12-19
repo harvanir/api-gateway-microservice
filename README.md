@@ -39,6 +39,9 @@ At the microservice layer, we use static or dynamic REST API responses that have
 - Quarkus etc Native
 - Akka
 - NodeJS
+- PHP 5.6 Apache2
+- PHP 5.6 Nginx
+- PHP 8.0 Apache2 (JIT enabled)
 
 ### Testing tools
 - JMeter (test-plan-jmeter.jmx)
@@ -84,7 +87,9 @@ At the microservice layer, we use static or dynamic REST API responses that have
     - Quarkus Vert.x RESTEasy Native: 8484
     - Vert.x RxJava2: 8585
     - Vert.x RESTEasy RxJava2: 8686
-    - PHP-5.6: 8787
+    - PHP-5.6 Apache2: 8787
+    - PHP-5.6 Nginx: 8788
+    - PHP-8.0 Apache2: 8888
 
 ## Test
 Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>

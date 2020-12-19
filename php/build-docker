@@ -1,3 +1,4 @@
 #!/bin/sh
-docker build -t php-5.6-apache2 .
-docker build -f Dockerfile-nginx -t php-5.6-nginx .
+docker build -f Dockerfile-php-5.6-apache2 -t php-5.6-apache2 .
+docker build -f Dockerfile-php-5.6-nginx -t php-5.6-nginx .
+docker build -f Dockerfile-php-8.0-apache2 -t php-8.0-apache2 .

@@ -1,0 +1,2 @@
+#!/bin/sh
+docker run -d -p 80:80 --rm --name php-5.6-nginx-app php-5.6-nginx

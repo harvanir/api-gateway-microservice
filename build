@@ -1,40 +1,44 @@
 #!/bin/sh
-cd eureka||exit
-./mvnw clean install -Dmaven.test.skip=true
-docker build -t eureka .
 
-cd ../cloud-gateway||exit
-./mvnw clean install -Dmaven.test.skip=true
-docker build -t spring-cloud-gateway .
+cd eureka || exit
+./build-app
+./build-docker
 
-cd ../webflux||exit
-./mvnw clean install -Dmaven.test.skip=true
-docker build -t webflux .
+cd ../cloud-gateway || exit
+./build-app
+./build-docker
 
-cd ../webmvc||exit
-./mvnw clean install -Dmaven.test.skip=true
-docker build -t webmvc .
+cd ../webflux || exit
+./build-app
+./build-docker
 
-cd ../go||exit
-docker build -t go .
+cd ../webmvc || exit
+./build-app
+./build-docker
 
-cd ../vertx-rxjava2||exit
-./mvnw clean package -Dmaven.test.skip=true
-docker build -t vertx-rxjava2 .
+cd ../go || exit
+./build-docker
 
-cd ../quarkus-vertx-resteasy||exit
-./mvnw clean package
-docker build -f Dockerfile.jvm -t quarkus-vertx-resteasy-jvm .
+cd ../vertx-rxjava2 || exit
+./build-app
+./build-docker
 
-cd ../zuul||exit
-./mvnw clean package -Dmaven.test.skip=true
-docker build -t zuul .
+cd ../quarkus-vertx-resteasy || exit
+./build-app
+./build-docker
 
-./mvnw clean package -Pnative # remark if you are build without host GraalVM
-docker build -f Dockerfile.native -t quarkus-vertx-resteasy-native .
+#./build-native-app
+#./build-native-docker
 
-cd ../vertx-resteasy-rxjava2||exit
-./mvnw clean package -Dmaven.test.skip=true
-docker build -t vertx-resteasy-rxjava2 .
+cd ../zuul || exit
+./build-app
+./build-docker
+
+cd ../vertx-resteasy-rxjava2 || exit
+./build-app
+./build-docker
+
+cd ../php || exit
+./build-docker
 
 cd ..

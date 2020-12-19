@@ -2,4 +2,4 @@ quarkus:
   vertx:
     prefer-native-transport: true
   native:
-    native-image-xmx: 2g
+    native-image-xmx: 3g

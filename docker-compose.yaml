@@ -251,6 +251,26 @@ services:
         limits:
           memory: 256m
 
+  php-5.6-apache2:
+    container_name: php-5.6-apache2
+    image: php-5.6-apache2
+    ports:
+      - 8787:80
+    networks:
+      - service
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
   nginx:
     container_name: nginx
     image: nginx:1.18-alpine

@@ -43,11 +43,12 @@ At the microservice layer, we use static or dynamic REST API responses that have
 ### Testing tools
 - JMeter (test-plan-jmeter.jmx)
 
-## Build & Run
+## Build, Run, Down
 ```shell script
 ./build
 ./run
 ./build-run
+./down
 ```
 
 ## API Endpoint
@@ -72,6 +73,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
 ### Microservice
  - URL: 
     - /hello/{name}
+    - /hello.php?name={name}
  - Query Parameter:
     - delay (optional)
  - Microservice port:
@@ -82,6 +84,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
     - Quarkus Vert.x RESTEasy Native: 8484
     - Vert.x RxJava2: 8585
     - Vert.x RESTEasy RxJava2: 8686
+    - PHP-5.6: 8787
 
 ## Test
 Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>

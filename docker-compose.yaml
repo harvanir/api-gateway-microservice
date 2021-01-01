@@ -313,6 +313,28 @@ services:
     volumes:
       - ./php/conf/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini:ro
 
+  nodejs:
+    container_name: nodejs
+    image: nodejs
+    ports:
+      - 8989:8080
+    networks:
+      - service
+    depends_on:
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
   nginx:
     container_name: nginx
     image: nginx:1.19.6-alpine

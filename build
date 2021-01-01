@@ -26,9 +26,8 @@ cd ../vertx-rxjava2 || exit
 cd ../quarkus-vertx-resteasy || exit
 ./build-app
 ./build-docker
-
-#./build-native-app
-#./build-native-docker
+./build-native-app
+./build-native-docker
 
 cd ../zuul || exit
 ./build-app

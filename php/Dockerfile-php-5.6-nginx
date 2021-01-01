@@ -1,3 +1,4 @@
 FROM mstrazds/nginx-php56:latest
 COPY src/ /var/www/public
+COPY conf/route.conf /etc/nginx/nginx.conf
 EXPOSE 80

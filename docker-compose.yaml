@@ -1,5 +1,9 @@
 version: "3.7"
 
+networks:
+  service:
+    driver: bridge
+
 services:
   eureka:
     container_name: eureka
@@ -393,7 +397,3 @@ services:
       resources:
         limits:
           memory: 256m
-
-networks:
-  service:
-    driver: bridge

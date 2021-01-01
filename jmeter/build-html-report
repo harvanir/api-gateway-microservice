@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cd report || exit
+
+for n in *.csv; do
+  echo "removing existing directory: $n.report"
+  rm -r $n.report
+
+  echo "generating report from: $n"
+  jmeter -g $n -o $n.report
+done
+
+cd ..

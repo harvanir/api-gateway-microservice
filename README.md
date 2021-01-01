@@ -42,9 +42,10 @@ At the microservice layer, we use static or dynamic REST API responses that have
 - PHP 5.6 Apache2
 - PHP 5.6 Nginx
 - PHP 8.0 Apache2 (JIT enabled)
+- Node js 15.5.0
 
 ### Testing tools
-- JMeter (test-plan-jmeter.jmx)
+- JMeter (report/test-plan-jmeter.jmx)
 
 ## Build, Run, Down
 ```shell script
@@ -90,9 +91,10 @@ At the microservice layer, we use static or dynamic REST API responses that have
     - PHP-5.6 Apache2: 8787
     - PHP-5.6 Nginx: 8788
     - PHP-8.0 Apache2: 8888
+    - Node js 15.5.0: 8989
 
 ## Test
-Open jmeter test plan file (<b>test-plan-jmeter.jmx</b>) to run the test.<br/>
+Open jmeter test plan file (<b>report/test-plan-jmeter.jmx</b>) to run the test.<br/>
 Available <b>User Define Variables</b>:
 - gwhost (API Gateway hostname/IP address)
 - mshost (Microservice hostname/ip address)

@@ -316,6 +316,7 @@ services:
           memory: 256m
     volumes:
       - ./php/conf/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini:ro
+#      - ./php/log/access.log:/var/log/apache2/access.log:rw
 
   nodejs:
     container_name: nodejs

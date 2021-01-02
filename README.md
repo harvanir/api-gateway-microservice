@@ -9,7 +9,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
 ## Topology
 ![Topology](docs/topology.png)
 
-## Pre requiste
+## Pre requisite
 - Git
 - Java JDK 8+
 - Docker
@@ -38,11 +38,10 @@ At the microservice layer, we use static or dynamic REST API responses that have
 - Quarkus etc JVM
 - Quarkus etc Native
 - Akka
-- NodeJS
 - PHP 5.6 Apache2
 - PHP 5.6 Nginx
 - PHP 8.0 Apache2 (JIT enabled)
-- Node js 15.5.0
+- Node js 15.5.0 Express
 
 ### Testing tools
 - JMeter (report/test-plan-jmeter.jmx)
@@ -91,7 +90,7 @@ At the microservice layer, we use static or dynamic REST API responses that have
     - PHP-5.6 Apache2: 8787
     - PHP-5.6 Nginx: 8788
     - PHP-8.0 Apache2: 8888
-    - Node js 15.5.0: 8989
+    - Node js 15.5.0 Express: 8989
 
 ## Test
 Open jmeter test plan file (<b>report/test-plan-jmeter.jmx</b>) to run the test.<br/>

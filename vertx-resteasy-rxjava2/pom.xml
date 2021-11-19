@@ -9,11 +9,8 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <resteasy.version>4.5.8.Final</resteasy.version>
-        <!-- bump to latest version -->
-        <io.vertx.version>3.9.4</io.vertx.version>
-        <!-- managed by resteasy-dependencies -->
-        <!--        <io.vertx.version>3.7.1</io.vertx.version>-->
+        <resteasy.version>5.0.0.Final</resteasy.version>
+        <io.vertx.version>4.1.0</io.vertx.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>

@@ -427,5 +427,8 @@ services:
       retries: 10
     restart: on-failure
     deploy:
+      resources:
+        limits:
+          memory: 256m
       restart_policy:
         condition: on-failure

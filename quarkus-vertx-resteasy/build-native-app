@@ -1,3 +1,4 @@
 #!/bin/sh
 
-./mvnw clean package -Dmaven.test.skip=true -Pnative # remark if you are build without host GraalVM
+./mvnw clean package -Dmaven.test.skip=true -Pnative -Dquarkus.native.container-build=true # remark if you are build without host GraalVM
+##./mvnw clean package -Dmaven.test.skip=true -Pnative # un remark if you are build using host GraalVM

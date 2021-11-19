@@ -33,5 +33,5 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	fmt.Fprintf(w, "Hello "+key)
+	_, _ = fmt.Fprintf(w, "Hello "+key)
 }

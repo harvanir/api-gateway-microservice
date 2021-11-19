@@ -343,7 +343,7 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx:1.19.6-alpine
+    image: nginx:1.20.2-alpine
     ports:
       - 9191:80
       - 9443:443
@@ -400,7 +400,7 @@ services:
         limits:
           memory: 256m
   kong:
-    image: kong:2.4.0-alpine
+    image: kong:2.6.0-alpine
     container_name: kong
     user: "${KONG_USER:-kong}"
     volumes:

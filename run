@@ -1,2 +1,2 @@
 #!/bin/sh
-docker-compose -f docker-compose.yaml --compatibility up -d
+docker compose -f docker-compose.yaml --compatibility up -d

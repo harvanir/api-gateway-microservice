@@ -190,7 +190,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 256m
 
   vertx-rxjava2:
     container_name: vertx-rxjava2

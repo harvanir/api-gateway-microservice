@@ -11,4 +11,4 @@ COPY --from=builder application/snapshot-dependencies/ ./
 COPY --from=builder application/spring-boot-loader/ ./
 COPY --from=builder application/application/ ./
 ENV JVM_OPT=""
-ENTRYPOINT ["sh", "-c", "java -server $JVM_OPT org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["sh", "-c", "java -server $JVM_OPT org.springframework.boot.loader.launch.JarLauncher"]

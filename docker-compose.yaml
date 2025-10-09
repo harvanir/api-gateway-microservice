@@ -18,7 +18,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 364m
+          memory: 256m
 
   spring-cloud-gateway:
     container_name: spring-cloud-gateway

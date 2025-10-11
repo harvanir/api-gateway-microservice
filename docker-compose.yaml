@@ -174,7 +174,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   quarkus-vertx-resteasy-jvm:
     container_name: quarkus-vertx-resteasy-jvm
@@ -227,7 +227,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   vertx-rxjava2:
     container_name: vertx-rxjava2
@@ -258,7 +258,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   vertx-resteasy-rxjava2:
     container_name: vertx-resteasy-rxjava2
@@ -289,7 +289,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 384m
 
   php-5.6-apache2:
     container_name: php-5.6-apache2
@@ -309,7 +309,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
     logging:
           driver: "none"
 
@@ -331,7 +331,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   php-8.0-apache2:
     container_name: php-8.0-apache2
@@ -351,7 +351,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
     logging:
           driver: "none"
     volumes:
@@ -378,7 +378,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   nginx:
     container_name: nginx
@@ -402,7 +402,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
     volumes:
       - ./nginx/route.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/favicon.ico:/usr/share/nginx/html/favicon.ico

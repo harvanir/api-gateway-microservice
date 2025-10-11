@@ -10,7 +10,7 @@
     <name>vertx-rxjava2</name>
 
     <properties>
-        <vertx.version>4.2.1</vertx.version>
+        <io.vertx.version>5.0.4</io.vertx.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -18,13 +18,23 @@
     <dependencies>
         <dependency>
             <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${io.vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
-            <version>${vertx.version}</version>
+            <version>${io.vertx.version}</version>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-rx-java2</artifactId>
-            <version>${vertx.version}</version>
+            <version>${io.vertx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-launcher-application</artifactId>
+            <version>${io.vertx.version}</version>
         </dependency>
     </dependencies>
 
@@ -55,7 +65,7 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Main-Class>io.vertx.core.Launcher</Main-Class>
+                                        <Main-Class>io.vertx.launcher.application.VertxApplication</Main-Class>
                                         <Main-Verticle>org.harvanir.demo.vertx.RxJava2Verticle</Main-Verticle>
                                     </manifestEntries>
                                 </transformer>

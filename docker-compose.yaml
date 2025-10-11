@@ -15,10 +15,45 @@ services:
         -XX:+UseG1GC
         -XX:MaxRAMPercentage=90.0
         -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dserver.port=8761 -Deureka.instance.hostname=eureka -Deureka.client.serviceUrl.defaultZone=http://eureka2:8762/eureka/,http://eureka3:8763/eureka/
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 384m
+  eureka2:
+    container_name: eureka2
+    image: eureka
+    ports:
+      - 8762:8762
+    networks:
+      - service
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dserver.port=8762 -Deureka.instance.hostname=eureka2 -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka3:8763/eureka/
+    deploy:
+      resources:
+        limits:
+          memory: 384m
+  eureka3:
+    container_name: eureka3
+    image: eureka
+    ports:
+      - 8763:8763
+    networks:
+      - service
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dserver.port=8763 -Deureka.instance.hostname=eureka3 -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka2:8762/eureka/
+    deploy:
+      resources:
+        limits:
+          memory: 384m
 
   spring-cloud-gateway:
     container_name: spring-cloud-gateway
@@ -47,6 +82,7 @@ services:
         -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
         -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
         -Dcom.sun.management.jmxremote.port=7001 -Dcom.sun.management.jmxremote.rmi.port=7001
+        -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka2:8762/eureka/,http://eureka3:8763/eureka/
     deploy:
       resources:
         limits:
@@ -80,6 +116,7 @@ services:
         -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
         -Dcom.sun.management.jmxremote.port=7002 -Dcom.sun.management.jmxremote.rmi.port=7002
         -Dspring.profiles.active=docker
+        -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka2:8762/eureka/,http://eureka3:8763/eureka/
     deploy:
       resources:
         limits:
@@ -273,6 +310,8 @@ services:
       resources:
         limits:
           memory: 256m
+    logging:
+          driver: "none"
 
   php-5.6-nginx:
     container_name: php-5.6-nginx
@@ -313,6 +352,8 @@ services:
       resources:
         limits:
           memory: 256m
+    logging:
+          driver: "none"
     volumes:
       - ./php/conf/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini:ro
 #      - ./php/log/access.log:/var/log/apache2/access.log:rw

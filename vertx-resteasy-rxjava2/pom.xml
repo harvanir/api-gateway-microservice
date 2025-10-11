@@ -9,8 +9,12 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <resteasy.version>5.0.0.Final</resteasy.version>
-        <io.vertx.version>4.1.0</io.vertx.version>
+        <!-- latest version - start -->
+        <!-- <resteasy.version>5.0.0.Final</resteasy.version>
+        <io.vertx.version>4.1.0</io.vertx.version> -->
+        <resteasy.version>6.2.14.Final</resteasy.version>
+        <io.vertx.version>4.5.21</io.vertx.version>
+        <!-- latest version - end -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -60,6 +64,12 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-vertx</artifactId>
         </dependency>
+        <!-- latest version - start -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+        </dependency>
+        <!-- latest version - end -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>

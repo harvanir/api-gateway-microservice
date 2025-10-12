@@ -149,13 +149,14 @@ services:
         -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
         -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
         -Dcom.sun.management.jmxremote.port=7003 -Dcom.sun.management.jmxremote.rmi.port=7003
+        -Dspring.threads.virtual.enabled=true -Dserver.tomcat.threads.max=400
     deploy:
       resources:
         limits:
           memory: 256m
 
-  go:
-    container_name: go
+  go-mux:
+    container_name: go-mux
     image: go
     ports:
       - 8181:8080
@@ -171,6 +172,30 @@ services:
     sysctls:
       net.ipv4.tcp_tw_reuse: 1
       net.ipv4.ip_local_port_range: 1025 65000
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+  go-fiber:
+    container_name: go-fiber
+    image: go
+    ports:
+      - 8182:8081
+    networks:
+      - service
+    depends_on:
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      SERVER: fiber
     deploy:
       resources:
         limits:

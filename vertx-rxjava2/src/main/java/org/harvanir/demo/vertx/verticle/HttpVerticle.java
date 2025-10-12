@@ -16,6 +16,6 @@ public class HttpVerticle extends AbstractVerticle {
 
         vertx.createHttpServer()
                 .requestHandler(router)
-                .listen(8080, event -> System.out.println("Vertx eventloop thread started: " + Thread.currentThread().getName()));
+                .listen(8080);
     }
 }

@@ -15,10 +15,45 @@ services:
         -XX:+UseG1GC
         -XX:MaxRAMPercentage=90.0
         -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dserver.port=8761 -Deureka.instance.hostname=eureka -Deureka.client.serviceUrl.defaultZone=http://eureka2:8762/eureka/,http://eureka3:8763/eureka/
     deploy:
       resources:
         limits:
-          memory: 364m
+          memory: 384m
+  eureka2:
+    container_name: eureka2
+    image: eureka
+    ports:
+      - 8762:8762
+    networks:
+      - service
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dserver.port=8762 -Deureka.instance.hostname=eureka2 -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka3:8763/eureka/
+    deploy:
+      resources:
+        limits:
+          memory: 384m
+  eureka3:
+    container_name: eureka3
+    image: eureka
+    ports:
+      - 8763:8763
+    networks:
+      - service
+    environment:
+      JVM_OPT: |-
+        -XX:+UseG1GC
+        -XX:MaxRAMPercentage=90.0
+        -Xlog:gc:GC.log -XX:+UseStringDeduplication
+        -Dserver.port=8763 -Deureka.instance.hostname=eureka3 -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka2:8762/eureka/
+    deploy:
+      resources:
+        limits:
+          memory: 384m
 
   spring-cloud-gateway:
     container_name: spring-cloud-gateway
@@ -47,6 +82,7 @@ services:
         -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
         -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
         -Dcom.sun.management.jmxremote.port=7001 -Dcom.sun.management.jmxremote.rmi.port=7001
+        -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka2:8762/eureka/,http://eureka3:8763/eureka/
     deploy:
       resources:
         limits:
@@ -80,6 +116,7 @@ services:
         -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
         -Dcom.sun.management.jmxremote.port=7002 -Dcom.sun.management.jmxremote.rmi.port=7002
         -Dspring.profiles.active=docker
+        -Deureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka/,http://eureka2:8762/eureka/,http://eureka3:8763/eureka/
     deploy:
       resources:
         limits:
@@ -112,13 +149,14 @@ services:
         -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false
         -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1
         -Dcom.sun.management.jmxremote.port=7003 -Dcom.sun.management.jmxremote.rmi.port=7003
+        -Dspring.threads.virtual.enabled=true -Dserver.tomcat.threads.max=400
     deploy:
       resources:
         limits:
           memory: 256m
 
-  go:
-    container_name: go
+  go-mux:
+    container_name: go-mux
     image: go
     ports:
       - 8181:8080
@@ -137,7 +175,31 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
+
+  go-fiber:
+    container_name: go-fiber
+    image: go
+    ports:
+      - 8182:8081
+    networks:
+      - service
+    depends_on:
+      - spring-cloud-gateway
+    ulimits:
+      nproc: 514933
+      nofile:
+        soft: 65535
+        hard: 65535
+    sysctls:
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.ip_local_port_range: 1025 65000
+    environment:
+      SERVER: fiber
+    deploy:
+      resources:
+        limits:
+          memory: 128m
 
   quarkus-vertx-resteasy-jvm:
     container_name: quarkus-vertx-resteasy-jvm
@@ -190,7 +252,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 128m
 
   vertx-rxjava2:
     container_name: vertx-rxjava2
@@ -221,7 +283,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   vertx-resteasy-rxjava2:
     container_name: vertx-resteasy-rxjava2
@@ -252,7 +314,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 384m
 
   php-5.6-apache2:
     container_name: php-5.6-apache2
@@ -272,7 +334,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
+    logging:
+          driver: "none"
 
   php-5.6-nginx:
     container_name: php-5.6-nginx
@@ -292,7 +356,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   php-8.0-apache2:
     container_name: php-8.0-apache2
@@ -312,7 +376,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
+    logging:
+          driver: "none"
     volumes:
       - ./php/conf/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini:ro
 #      - ./php/log/access.log:/var/log/apache2/access.log:rw
@@ -337,7 +403,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
 
   nginx:
     container_name: nginx
@@ -361,7 +427,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256m
+          memory: 128m
     volumes:
       - ./nginx/route.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/favicon.ico:/usr/share/nginx/html/favicon.ico

@@ -27,12 +27,19 @@ spring:
           filters:
             - RewritePath=/webmvc/(?<rewrite>.*), /${rewrite}
 
-        - id: hello-go
-          uri: http://go:8080
+        - id: hello-go-mux
+          uri: http://go-mux:8080
           predicates:
-            - Path=/go/**
+            - Path=/go-mux/**
           filters:
-            - RewritePath=/go/(?<rewrite>.*), /${rewrite}
+            - RewritePath=/go-mux/(?<rewrite>.*), /${rewrite}
+
+        - id: hello-go-fiber
+          uri: http://go-fiber:8081
+          predicates:
+            - Path=/go-fiber/**
+          filters:
+            - RewritePath=/go-fiber/(?<rewrite>.*), /${rewrite}
 
         - id: hello-quarkus-vertx-resteasy-jvm
           uri: http://quarkus-vertx-resteasy-jvm:8080

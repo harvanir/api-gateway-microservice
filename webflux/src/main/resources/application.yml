@@ -12,4 +12,4 @@ eureka:
     webclient:
       enabled: true
   instance:
-    lease-renewal-interval-in-seconds: 1
+    lease-renewal-interval-in-seconds: 2

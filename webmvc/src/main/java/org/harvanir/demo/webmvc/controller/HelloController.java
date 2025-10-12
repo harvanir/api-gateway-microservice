@@ -27,4 +27,9 @@ public class HelloController {
 
         return hello;
     }
+
+    @GetMapping(path = "/name", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String getThreadName() {
+        return Thread.currentThread().toString();
+    }
 }

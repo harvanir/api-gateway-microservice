@@ -10,7 +10,7 @@
     <name>vertx-rxjava2</name>
 
     <properties>
-        <io.vertx.version>5.0.4</io.vertx.version>
+        <io.vertx.version>5.0.5</io.vertx.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>

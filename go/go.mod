@@ -3,7 +3,7 @@ module github.com/harvanir/api-gateway-microservice/go
 go 1.25
 
 require (
-	github.com/gofiber/fiber/v2 v2.52.9
+	github.com/gofiber/fiber/v2 v2.52.12
 	github.com/gorilla/mux v1.8.1
 )
 
